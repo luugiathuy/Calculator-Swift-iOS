@@ -13,16 +13,26 @@ class ViewController: UIViewController
     @IBOutlet weak var display: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
+    var userDidTypeAFloatingPoint = false
     
     var brain = CalculatorBrain()
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
+        let isFloatingPoint = digit == "."
         if userIsInTheMiddleOfTypingANumber {
+            let userHasTypedAFloatingPoint = display.text!.rangeOfString(".") != nil
+            if isFloatingPoint && userHasTypedAFloatingPoint {
+                return
+            }
             display.text = display.text! + digit
         } else {
-            display.text = digit
             userIsInTheMiddleOfTypingANumber = true
+            if isFloatingPoint {
+                display.text = "0."
+            } else {
+                display.text = digit
+            }
         }
     }
    
