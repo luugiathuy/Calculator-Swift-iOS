@@ -95,4 +95,8 @@ class CalculatorBrain
         }
         return evaluate()
     }
+    
+    func clearOps() {
+        opStack.removeAll(keepCapacity: false);
+    }
 }

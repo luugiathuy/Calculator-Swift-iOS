@@ -14,7 +14,6 @@ class ViewController: UIViewController
     @IBOutlet weak var history: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
-    var userDidTypeAFloatingPoint = false
     
     var brain = CalculatorBrain()
     
@@ -62,6 +61,12 @@ class ViewController: UIViewController
         } else {
             displayValue = 0
         }
+    }
+    
+    @IBAction func reset() {
+        displayValue = 0;
+        brain.clearOps();
+        history.text = "";
     }
     
     func appendHistory(text: String) {
