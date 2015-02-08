@@ -50,7 +50,6 @@ class ViewController: UIViewController
         }
     }
     
-    
     @IBAction func enter() {
         if userIsInTheMiddleOfTypingANumber {
             appendHistory(display.text!)
@@ -67,6 +66,17 @@ class ViewController: UIViewController
         displayValue = 0;
         brain.clearOps();
         history.text = "";
+    }
+    
+    @IBAction func backspace() {
+        if !userIsInTheMiddleOfTypingANumber {
+            return
+        }
+        if countElements(display.text!) > 1 {
+            display.text = dropLast(display.text!)
+        } else {
+            displayValue = 0
+        }
     }
     
     func appendHistory(text: String) {
