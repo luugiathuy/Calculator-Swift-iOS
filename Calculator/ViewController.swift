@@ -67,15 +67,13 @@ class ViewController: UIViewController
             appendHistory(display.text!)
         }
         userIsInTheMiddleOfTypingANumber = false
-        if let result = brain.pushOperand(displayValue) {
-            displayValue = result
-        } else {
-            displayValue = 0
+        if displayValue != nil {
+            displayValue = brain.pushOperand(displayValue!)
         }
     }
     
     @IBAction func reset() {
-        displayValue = 0;
+        displayValue = nil;
         brain.clearOps();
         history.text = "";
     }
@@ -87,20 +85,27 @@ class ViewController: UIViewController
         if countElements(display.text!) > 1 {
             display.text = dropLast(display.text!)
         } else {
-            displayValue = 0
+            displayValue = nil
         }
     }
     
-    func appendHistory(text: String) {
+    private func appendHistory(text: String) {
         history.text = history.text! + " " + text;
     }
     
-    var displayValue: Double {
+    var displayValue: Double? {
         get {
-            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+            if let number = NSNumberFormatter().numberFromString(display.text!) {
+                return number.doubleValue
+            }
+            return nil
         }
         set {
-            display.text = "\(newValue)"
+            if newValue != nil {
+                display.text = "\(newValue!)"
+            } else {
+                display.text = "0"
+            }
             userIsInTheMiddleOfTypingANumber = false
         }
     }
