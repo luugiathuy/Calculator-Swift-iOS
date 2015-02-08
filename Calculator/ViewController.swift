@@ -36,6 +36,18 @@ class ViewController: UIViewController
         }
     }
    
+    @IBAction func changeSign(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            if display.text!.rangeOfString("-") != nil {
+                display.text = dropFirst(display.text!)
+            } else {
+                display.text = "-" + display.text!
+            }
+        } else {
+            operate(sender)
+        }
+    }
+    
     @IBAction func operate(sender: UIButton) {
         if userIsInTheMiddleOfTypingANumber {
             enter()
