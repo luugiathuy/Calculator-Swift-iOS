@@ -95,10 +95,7 @@ class ViewController: UIViewController
     
     var displayValue: Double? {
         get {
-            if let number = NSNumberFormatter().numberFromString(display.text!) {
-                return number.doubleValue
-            }
-            return nil
+            return NSNumberFormatter().numberFromString(display.text!)?.doubleValue
         }
         set {
             if newValue != nil {
